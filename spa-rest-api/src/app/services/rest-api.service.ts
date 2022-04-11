@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 })
 export class RestApiService {
 
-  apiUrl:string = environment.API_URL;
+  apiUrl:string = 'https://api.openbrewerydb.org/breweries/';
 
   constructor(private http: HttpClient) { }
 
