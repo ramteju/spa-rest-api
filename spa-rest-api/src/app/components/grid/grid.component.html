@@ -28,7 +28,9 @@
         <!-- actions Column -->
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef> actions </th>
-            <td mat-cell *matCellDef="let element"> {{element.actions}} </td>
+            <td mat-cell *matCellDef="let element"> 
+                <mat-icon aria-hidden="false" aria-label="Example preview icon" (click)="ShowMoreInfo(element)">preview</mat-icon>
+            </td>
         </ng-container>
 
 
