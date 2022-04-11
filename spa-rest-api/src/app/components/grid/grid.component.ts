@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-
 import { RestApiService } from 'src/app/services/rest-api.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { BreweriesAddressComponent } from '../breweries-address/breweries-address.component';
 
 @Component({
   selector: 'app-grid',
@@ -16,7 +17,7 @@ export class GridComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: any;
 
 
-  constructor(private restAPI:RestApiService) { }
+  constructor(private restAPI:RestApiService,public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getApiData()
@@ -27,6 +28,15 @@ export class GridComponent implements OnInit {
     this.dataSource = await this.restAPI.getData("?by_city=san_diego").toPromise().then(r =>r).catch(e =>[]);
     this.dataSource.paginator = this.paginator;
 
+  }
+
+  ShowMoreInfo(brewery:any){
+    console.log(brewery);
+      const dialogRef = this.dialog.open(BreweriesAddressComponent, {
+        width: '850px',
+        height:'600px',
+        data: brewery.id,
+      });
   }
 
 }
