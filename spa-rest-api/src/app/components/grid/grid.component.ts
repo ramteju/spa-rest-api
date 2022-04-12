@@ -1,32 +1,52 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+
 import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+
+
 
 import { RestApiService } from 'src/app/services/rest-api.service';
+import { DetailsPopupComponent } from '../details-popup/details-popup.component';
+
+export interface UserData {
+  id: string;
+  name: string;
+  progress: string;
+  fruit: string;
+}
 
 @Component({
   selector: 'app-grid',
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.scss']
 })
-export class GridComponent implements OnInit {
+export class GridComponent implements AfterViewInit {
 
   displayedColumns: string[] = ['name', 'type', 'address', 'website', 'actions'];
-  dataSource:any;
+  dataSource: any = [];
 
   @ViewChild(MatPaginator) paginator: any;
 
 
-  constructor(private restAPI:RestApiService) { }
 
-  ngOnInit(): void {
-    this.getApiData()
+  constructor(private restApI: RestApiService, private dialog: MatDialog) {
   }
 
 
-  async getApiData(){
-    this.dataSource = await this.restAPI.getData("?by_city=san_diego").toPromise().then(r =>r).catch(e =>[]);
-    this.dataSource.paginator = this.paginator;
 
+  async getApiData() {
+    return await this.restApI.getData("?by_city=san_diego").toPromise().then(r => r).catch(e => []);
+  }
+
+  async ngAfterViewInit() {
+    const data: any = await this.getApiData();
+    this.dataSource = new MatTableDataSource(data);
+    this.dataSource.paginator = this.paginator;
+  }
+
+  openDialog(details: object) {
+    const dialogRef = this.dialog.open(DetailsPopupComponent, { data: details });
   }
 
 }

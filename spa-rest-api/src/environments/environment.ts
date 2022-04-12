@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  API_URL: "https://api.openbrewerydb.org/breweries/"
+  API_URL: "https://api.openbrewerydb.org/breweries/",
+  MAP_API_KEY: "AIzaSyAS781iEwVsu3dsWBWKBALvh7hOwGiOodg"
 };
 
 /*
