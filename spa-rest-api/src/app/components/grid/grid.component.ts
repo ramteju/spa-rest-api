@@ -46,7 +46,7 @@ export class GridComponent implements AfterViewInit {
   }
 
   openDialog(details: object) {
-    const dialogRef = this.dialog.open(DetailsPopupComponent, { data: details });
+    const dialogRef = this.dialog.open(DetailsPopupComponent, { data: details, width:"90vw", height:"90vh" });
   }
 
 }

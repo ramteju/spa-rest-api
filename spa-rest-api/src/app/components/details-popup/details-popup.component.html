@@ -2,10 +2,12 @@
 
 <mat-dialog-content>
     <mat-card>
-        <mat-card-title>{details?.name}</mat-card-title>
-        <mat-card-subtitle>Start</mat-card-subtitle>
+        <mat-card-title>{{ data.name }}</mat-card-title>
+        <mat-card-subtitle>Address</mat-card-subtitle>
         <mat-card-content>
-            
+            <div *ngIf="mapLoaded">
+                <google-map width="100%" [options]="options"></google-map>
+              </div>
         </mat-card-content>
     </mat-card>
 </mat-dialog-content>
